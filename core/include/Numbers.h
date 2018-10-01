@@ -13,9 +13,11 @@
 namespace cows_and_bulls {
 
 struct Numbers {
-
-};
-
+  static constexpr auto nums = utils::GetArray<
+      #include "numbers.dat"
+          >();
+  };
 }
+
 
 #endif // COWS_AND_BULLS_NUMBERS_H

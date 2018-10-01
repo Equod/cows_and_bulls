@@ -147,3 +147,4 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+/core/include/numbers.dat

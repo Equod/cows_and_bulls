@@ -78,7 +78,7 @@ struct NumberFilter : NumberFilterT<std::_Index_tuple<Idx...>> {
 };
 
 template<size_t... Idx>
-static constexpr std::array<size_t, sizeof...(Idx)> GetArray() {
+static constexpr std::array<size_t, sizeof...(Idx)> GetArray() noexcept {
   return {Idx...};
 }
 

@@ -4,6 +4,7 @@
 
 int main() {
   cows_and_bulls::Game game;
-  std::cout << "Hello, World! " << cows_and_bulls::Numbers::nums.size() << std::endl;
+  std::cout << "Hello, World!\n" << cows_and_bulls::Numbers::nums.size() << "\n"
+    << game.GetAvailableNumbersCount() << std::endl;
   return 0;
 }

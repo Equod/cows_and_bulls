@@ -12,11 +12,15 @@
 
 namespace cows_and_bulls {
 
-struct Numbers {
-  static constexpr auto nums = utils::GetArray<
-      #include "numbers.dat"
-          >();
-  };
+template<size_t... Idx>
+struct NumbersImpl {
+  static constexpr std::array<Number, sizeof...(Idx)> nums = { Number(Idx) ... };
+};
+
+using Numbers = NumbersImpl<
+#include "numbers.dat"
+>;
+
 }
 
 

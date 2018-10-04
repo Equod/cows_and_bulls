@@ -16,8 +16,14 @@ Game::Game() noexcept :
 {}
 
 const Number& Game::GetNumberToAsk() const noexcept {
-  // TODO: return the correct type
-  return *available_numbers.begin();
+  std::map<Number, size_t> erasable;
+  for(const auto& num : Numbers::nums) {
+    erasable[num] = GetMinErasable(num);
+  }
+  auto elem = std::max_element(erasable.begin(), erasable.end(), [](const auto& lhs, const auto& rhs){
+    return lhs.second > rhs.second;
+  });
+  return elem->first;
 }
 
 size_t Game::GetMinErasable(const Number& number) const noexcept {

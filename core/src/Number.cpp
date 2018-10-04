@@ -14,13 +14,13 @@ Result Number::GetResultFor(const Number& other) const noexcept {
   size_t cows = 0;
   for (size_t i = 0; i < size(); ++i) {
     if (at(i) == other[i]) {
-      bulls++;
+      ++bulls;
     }
   }
   for (size_t i = 0; i < size(); ++i) {
     for (size_t j = 0; j < other.size(); ++j) {
       if(i != j && at(i) == other[j]) {
-        cows = 0;
+        ++cows;
       }
     }
   }
@@ -30,7 +30,7 @@ Result Number::GetResultFor(const Number& other) const noexcept {
 size_t Number::GetAsSingleNum() const noexcept {
   size_t result = 0;
   for (size_t i = 0; i < size(); ++i) {
-    result += at(i) * (size_t)std::pow(10, i);
+    result += at(i) * (size_t)std::pow(10, size() - 1 - i);
   }
   return result;
 }

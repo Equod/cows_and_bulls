@@ -6,6 +6,7 @@
 #define COWS_AND_BULLS_RESULT_H
 
 #include <map>
+#include <ostream>
 
 namespace cows_and_bulls {
 
@@ -17,6 +18,10 @@ class Result : public std::pair<size_t, size_t> {
   }
   size_t GetCowCount() const noexcept {
     return second;
+  }
+  friend std::ostream& operator<<(std::ostream& os, const Result& result) {
+    os << "{" << result.first << ", " << result.second << " }\n";
+    return os;
   }
 };
 

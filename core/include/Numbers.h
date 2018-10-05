@@ -8,18 +8,22 @@
 #include <vector>
 #include "Number.h"
 #include <utility>
-#include "utils.h"
 
 namespace cows_and_bulls {
 
-template<size_t... Idx>
-struct NumbersImpl {
-  static constexpr std::array<Number, sizeof...(Idx)> nums = { Number(Idx) ... };
+template<size_t...N>
+struct NumsTemplateImpl {
+  static constexpr size_t size() noexcept { return sizeof...(N); }
+  static constexpr std::array<Number, size()> nums = { Number(N) ... };
 };
 
-using Numbers = NumbersImpl<
+using NumsTemplate = NumsTemplateImpl<
 #include "numbers.dat"
 >;
+
+struct Numbers {
+  static constexpr std::array<Number, NumsTemplate::size()> nums = NumsTemplate::nums;
+};
 
 }
 

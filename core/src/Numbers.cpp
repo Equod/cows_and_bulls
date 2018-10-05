@@ -3,9 +3,9 @@
 //
 
 #include <Numbers.h>
-#include <cmath>
-
-#include "Numbers.h"
 
 using cows_and_bulls::Number;
 using cows_and_bulls::Numbers;
+using cows_and_bulls::NumsTemplate;
+
+const std::array<Number, NumsTemplate::size()> Numbers::nums;

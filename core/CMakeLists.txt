@@ -14,6 +14,6 @@ add_custom_target(
         COMMAND python generate_numbers.py
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/include)
 
-add_library(${PROJECT_NAME} ${SOURCE_FILES} include/Result.cpp include/Result.h)
+add_library(${PROJECT_NAME} ${SOURCE_FILES} src/Result.cpp include/Result.h)
 
 add_dependencies(${PROJECT_NAME} generate_numbers_dat)

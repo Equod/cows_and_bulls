@@ -12,7 +12,7 @@ set(${PROJECT_NAME}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include
 add_custom_target(
         generate_numbers_dat
         COMMAND python generate_numbers.py
-        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/include)
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src)
 
 add_library(${PROJECT_NAME} ${SOURCE_FILES})
 

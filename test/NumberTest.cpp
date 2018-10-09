@@ -25,7 +25,11 @@ TEST_P(NumberTest, get_result_for_self) {
   EXPECT_EQ(result, num.GetResultFor(num));
 }
 
-INSTANTIATE_TEST_CASE_P(NumbersConstructionTest, NumberTest, ::testing::ValuesIn(Numbers::nums));
+TEST_P(NumberTest, NumberResultValidationTest) {
+  EXPECT_TRUE(Number(1234).GetResultFor(GetParam()).IsValid());
+}
+
+INSTANTIATE_TEST_CASE_P(NumberPermutationTest, NumberTest, ::testing::ValuesIn(Numbers::nums));
 
 class NumberResultTest : public ::testing::TestWithParam<std::tuple<Number, Number, Result>> {};
 

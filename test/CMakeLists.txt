@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.5)
 
 project(cows_and_bulls_core_test)
 
+set(CMAKE_CXX_STANDARD 17)
+
 file(GLOB SOURCE_FILES *.cpp)
 
 add_subdirectory(third_party/gtest)

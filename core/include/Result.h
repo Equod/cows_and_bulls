@@ -23,7 +23,7 @@ class Result : public std::pair<size_t, size_t> {
     os << "{" << result.first << ", " << result.second << " }\n";
     return os;
   }
-  bool IsValid() const {
+  bool IsValid() const noexcept{
     return GetBullCount() + GetCowCount() <= 4 &&
         (GetBullCount() != 3 || GetCowCount() != 1);
   }

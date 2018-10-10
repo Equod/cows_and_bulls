@@ -39,7 +39,7 @@ TEST_P(NumberResultTest, number_result_test) {
  EXPECT_EQ(result, target.GetResultFor(base));
 }
 
-INSTANTIATE_TEST_CASE_P(TestResult, NumberResultTest, ::testing::Values(
+INSTANTIATE_TEST_CASE_P(TestCorrectResult, NumberResultTest, ::testing::Values(
     //              base          target        expectation
     std::make_tuple(Number{1023}, Number{4567}, Result{0, 0}),
     std::make_tuple(Number{1023}, Number{1456}, Result{1, 0}),

@@ -5,11 +5,14 @@
 #include "Game.h"
 
 #include <algorithm>
+#include <Game.h>
+
 #include "Numbers.h"
 
 using cows_and_bulls::Game;
 using cows_and_bulls::Number;
 using cows_and_bulls::Numbers;
+using cows_and_bulls::Result;
 
 Game::Game() noexcept :
   available_numbers(Numbers::nums.begin(), Numbers::nums.end())
@@ -36,7 +39,7 @@ size_t Game::GetMinErasable(const Number& number) const noexcept {
   })->second;
 }
 
-void cows_and_bulls::Game::InsertResult(const Number& number, const cows_and_bulls::Result& result) {
+void Game::InsertResultImpl(const Number& number, const Result& result) noexcept {
   for (auto it = available_numbers.begin(); it != available_numbers.end();) {
     if(it->GetResultFor(number) != result) {
       it = available_numbers.erase(it);
@@ -44,4 +47,12 @@ void cows_and_bulls::Game::InsertResult(const Number& number, const cows_and_bul
       ++it;
     }
   }
+}
+
+bool Game::InsertResult(const Number& number, const Result& result) noexcept {
+  if(number.IsValid() && result.IsValid()) {
+    InsertResultImpl(number, result);
+    return true;
+  }
+  return false;
 }

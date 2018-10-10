@@ -17,11 +17,15 @@ class Game {
     return available_numbers.size();
   }
   const Number& GetNumberToAsk() const noexcept;
-  size_t GetMinErasable(const Number& number) const noexcept;
-  void InsertResult(const Number& number, const Result& result);
-  const std::set<Number>& GetNumbers() const {
+  bool InsertResult(const Number& number, const Result& result) noexcept;
+  const std::set<Number>& GetNumbers() const noexcept {
     return available_numbers;
   }
+
+ protected:
+  void InsertResultImpl(const Number& number, const Result& result) noexcept;
+  size_t GetMinErasable(const Number& number) const noexcept;
+
  private:
   std::set<Number> available_numbers;
 };

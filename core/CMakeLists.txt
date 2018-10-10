@@ -4,6 +4,8 @@ project(cows_and_bulls_core)
 
 file(GLOB SOURCE_FILES src/*.cpp)
 
+set(CMAKE_CXX_STANDARD 17)
+
 include_directories(include)
 
 set(${PROJECT_NAME}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include

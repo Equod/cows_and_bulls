@@ -40,4 +40,15 @@ std::ostream& operator<<(std::ostream& os, const Number& number) {
   return os << number.GetAsSingleNum();
 }
 
+bool Number::IsValid() const noexcept {
+  for (size_t i = 0; i < size(); ++i) {
+    for (size_t j = i + 1; j < size(); ++j) {
+      if (at(i) == at(j)) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 }

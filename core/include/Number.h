@@ -23,6 +23,7 @@ class Number : public std::array<size_t, 4> {
   Result GetResultFor(const Number& other) const noexcept;
   size_t GetAsSingleNum() const noexcept;
   friend std::ostream& operator<<(std::ostream& os, const Number& number);
+  bool IsValid() const noexcept;
 };
 
 }

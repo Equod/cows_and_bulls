@@ -16,10 +16,6 @@ class Number : public std::array<size_t, 4> {
   constexpr Number(size_t num) noexcept
     : array{ (num / 1000) % 10, (num / 100) % 10, (num / 10) % 10, num % 10 }
   {}
-  template<size_t N>
-  constexpr Number() noexcept
-    : array{ (N / 1000) % 10, (N / 100) % 10, (N / 10) % 10, N % 10 }
-  {}
   Result GetResultFor(const Number& other) const noexcept;
   size_t GetAsSingleNum() const noexcept;
   friend std::ostream& operator<<(std::ostream& os, const Number& number);

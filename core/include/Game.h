@@ -16,7 +16,7 @@ class Game {
   size_t GetAvailableNumbersCount() const noexcept {
     return available_numbers.size();
   }
-  const Number& GetNumberToAsk() const noexcept;
+  Number GetNumberToAsk() const noexcept;
   bool InsertResult(const Number& number, const Result& result) noexcept;
   const std::set<Number>& GetNumbers() const noexcept {
     return available_numbers;

@@ -6,7 +6,7 @@
 
 #include <algorithm>
 #include <Game.h>
-
+#include "Number.h"
 #include "Numbers.h"
 
 using cows_and_bulls::Game;
@@ -18,15 +18,12 @@ Game::Game() noexcept :
   available_numbers(Numbers::nums.begin(), Numbers::nums.end())
 {}
 
-const Number& Game::GetNumberToAsk() const noexcept {
-  std::map<Number, size_t> erasable;
+Number Game::GetNumberToAsk() const noexcept {
+  std::array<size_t, Numbers::max()> erasable{};
   for(const auto& num : Numbers::nums) {
-    erasable[num] = GetMinErasable(num);
+    erasable[num.GetAsSingleNum()] = GetMinErasable(num);
   }
-  auto elem = std::max_element(erasable.begin(), erasable.end(), [](const auto& lhs, const auto& rhs){
-    return lhs.second > rhs.second;
-  });
-  return elem->first;
+  return *std::max_element(erasable.begin(), erasable.end());
 }
 
 size_t Game::GetMinErasable(const Number& number) const noexcept {

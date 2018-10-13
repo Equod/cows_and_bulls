@@ -20,7 +20,7 @@ class Result : public std::pair<size_t, size_t> {
     return second;
   }
   friend std::ostream& operator<<(std::ostream& os, const Result& result) {
-    os << "{" << result.first << ", " << result.second << " }\n";
+    os << "{" << result.first << ", " << result.second << " }";
     return os;
   }
   bool IsValid() const noexcept{

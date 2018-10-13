@@ -31,8 +31,8 @@ size_t Game::GetMinErasable(const Number& number) const noexcept {
   for (const auto& num : available_numbers) {
     res_map[num.GetResultFor(number)]++;
   }
-  return std::min_element(res_map.begin(), res_map.end(), [](const auto& rhs, const auto& lhs) {
-    return lhs.second < rhs.second;
+  return available_numbers.size() - std::min_element(res_map.begin(), res_map.end(), [](const auto& lhs, const auto& rhs) {
+    return rhs.second < lhs.second;
   })->second;
 }
 

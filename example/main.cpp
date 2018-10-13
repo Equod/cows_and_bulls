@@ -7,13 +7,15 @@ int main() {
 
   // 1724
 
-  game.InsertResult(1023, {2, 0});
   std::cout << "number to ask: " << game.GetNumberToAsk() << "\n";
-  game.InsertResult(1245, {1, 2});
+  game.InsertResult(1234, {2, 1});
+  std::cout << "Nums: " << game.GetAvailableNumbersCount() << std::endl;
+  std::cout << "number to ask: " << game.GetNumberToAsk() << "\n";
+  game.InsertResult(2035, {0, 1});
   std::cout << "Nums: " << game.GetAvailableNumbersCount() << std::endl;
   std::cout << game.GetNumbers() << "\n";
   std::cout << "number to ask: " << game.GetNumberToAsk() << "\n";
-  game.InsertResult(1264, {2, 1});
+  game.InsertResult(1346, {1, 1});
   std::cout << "Nums: " << game.GetAvailableNumbersCount() << std::endl;
   std::cout << game.GetNumbers() << "\n";
   std::cout << "number to ask: " << game.GetNumberToAsk() << "\n";

@@ -23,7 +23,7 @@ Number Game::GetNumberToAsk() const noexcept {
   for(const auto& num : Numbers::nums) {
     erasable[num.GetAsSingleNum()] = GetMinErasable(num);
   }
-  return *std::max_element(erasable.begin(), erasable.end());
+  return std::distance(erasable.begin(), std::max_element(erasable.begin(), erasable.end()));
 }
 
 size_t Game::GetMinErasable(const Number& number) const noexcept {

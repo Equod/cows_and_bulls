@@ -20,9 +20,9 @@ Game::Game() noexcept :
 
 Number Game::GetNumberToAsk() const noexcept {
   std::array<size_t, Numbers::max()> erasable{};
-  for(const auto& num : Numbers::nums) {
+  std::for_each(Numbers::nums.begin(), Numbers::nums.end(), [this, &erasable](const auto& num) {
     erasable[num.GetAsSingleNum()] = GetMinErasable(num);
-  }
+  });
   return std::distance(erasable.begin(), std::max_element(erasable.begin(), erasable.end()));
 }
 

@@ -4,23 +4,15 @@
 
 int main() {
   cows_and_bulls::Game game;
+  cows_and_bulls::Number magic_number{6549};
 
-  // 1724
-
-  std::cout << "number to ask: " << game.GetNumberToAsk() << "\n";
-  game.InsertResult(1234, {2, 1});
-  std::cout << "Nums: " << game.GetAvailableNumbersCount() << std::endl;
-  std::cout << "number to ask: " << game.GetNumberToAsk() << "\n";
-  game.InsertResult(2035, {0, 1});
-  std::cout << "Nums: " << game.GetAvailableNumbersCount() << std::endl;
-  std::cout << game.GetNumbers() << "\n";
-  std::cout << "number to ask: " << game.GetNumberToAsk() << "\n";
-  game.InsertResult(1346, {1, 1});
-  std::cout << "Nums: " << game.GetAvailableNumbersCount() << std::endl;
-  std::cout << game.GetNumbers() << "\n";
-  std::cout << "number to ask: " << game.GetNumberToAsk() << "\n";
-  game.InsertResult(1708, {2, 0});
-  std::cout << "Nums: " << game.GetAvailableNumbersCount() << std::endl;
-  std::cout << game.GetNumbers() << "\n";
+  while (game.GetAvailableNumbersCount() > 1) {
+    cows_and_bulls::Number number = game.GetNumberToAsk();
+    std::cout << "number to ask: " << number << "\n";
+    cows_and_bulls::Result result = magic_number.GetResultFor(number);
+    std::cout << number << " -> " << result << "\n";
+    game.InsertResult(number, result);
+    std::cout << "[" << game.GetAvailableNumbersCount() << "] " << "Nums: " << game.GetNumbers() << std::endl;
+  }
   return 0;
 }

@@ -20,9 +20,12 @@ Game::Game() noexcept :
 
 Number Game::GetNumberToAsk() const noexcept {
   std::array<size_t, Numbers::max()> erasable{};
-  std::for_each(Numbers::nums.begin(), Numbers::nums.end(), [this, &erasable](const auto& num) {
-    erasable[num.GetAsSingleNum()] = GetMinErasable(num);
-  });
+
+  #pragma omp parallel for
+  for(auto it = Numbers::nums.begin(); it < Numbers::nums.end(); ++it) {
+    erasable[it->GetAsSingleNum()] = GetMinErasable(*it);
+  };
+
   return std::distance(erasable.begin(), std::max_element(erasable.begin(), erasable.end()));
 }
 

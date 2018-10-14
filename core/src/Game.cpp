@@ -19,11 +19,12 @@ Game::Game() noexcept :
 {}
 
 Number Game::GetNumberToAsk() const noexcept {
-  std::array<size_t, Numbers::max()> erasable{};
+  std::array<uint64_t, Numbers::max()> erasable{};
 
   #pragma omp parallel for
-  for(auto it = Numbers::nums.begin(); it < Numbers::nums.end(); ++it) {
-    erasable[it->GetAsSingleNum()] = GetMinErasable(*it);
+  for (auto it = Numbers::nums.begin(); it < Numbers::nums.end(); ++it) {
+    erasable[it->GetAsSingleNum()] =
+        (GetMinErasable(*it) << 32 | (available_numbers.find(*it) != available_numbers.end()));
   };
 
   return std::distance(erasable.begin(), std::max_element(erasable.begin(), erasable.end()));
@@ -34,9 +35,10 @@ size_t Game::GetMinErasable(const Number& number) const noexcept {
   for (const auto& num : available_numbers) {
     res_map[num.GetResultFor(number)]++;
   }
-  return available_numbers.size() - std::min_element(res_map.begin(), res_map.end(), [](const auto& lhs, const auto& rhs) {
-    return rhs.second < lhs.second;
-  })->second;
+  return available_numbers.size()
+      - std::min_element(res_map.begin(), res_map.end(), [](const auto& lhs, const auto& rhs) {
+        return rhs.second < lhs.second;
+      })->second;
 }
 
 void Game::InsertResultImpl(const Number& number, const Result& result) noexcept {

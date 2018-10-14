@@ -4,7 +4,7 @@
 
 int main() {
   cows_and_bulls::Game game;
-  cows_and_bulls::Number magic_number{6549};
+  cows_and_bulls::Number magic_number{7491};
 
   while (game.GetAvailableNumbersCount() > 1) {
     cows_and_bulls::Number number = game.GetNumberToAsk();

@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <Game.h>
+#include <random>
 #include "Number.h"
 #include "Numbers.h"
 
@@ -19,15 +20,21 @@ Game::Game() noexcept :
 {}
 
 Number Game::GetNumberToAsk() const noexcept {
-  std::array<uint64_t, Numbers::max()> erasable{};
+  if(available_numbers.size() != Numbers::size()) {
+    std::array<uint64_t, Numbers::max()> erasable{};
 
-  #pragma omp parallel for
-  for (auto it = Numbers::nums.begin(); it < Numbers::nums.end(); ++it) {
-    erasable[it->GetAsSingleNum()] =
-        (GetMinErasable(*it) << 32 | (available_numbers.find(*it) != available_numbers.end()));
-  };
+    #pragma omp parallel for
+    for (auto it = Numbers::nums.begin(); it < Numbers::nums.end(); ++it) {
+      erasable[it->GetAsSingleNum()] =
+          (GetMinErasable(*it) << 32 | (available_numbers.find(*it) != available_numbers.end()));
+    };
 
-  return std::distance(erasable.begin(), std::max_element(erasable.begin(), erasable.end()));
+    return std::distance(erasable.begin(), std::max_element(erasable.begin(), erasable.end()));
+  }
+  std::random_device rd;
+  std::mt19937 mt(rd());
+  std::uniform_int_distribution<size_t> dist(0, FirstNumbers::size() - 1);
+  return FirstNumbers::idx[dist(mt)];
 }
 
 size_t Game::GetMinErasable(const Number& number) const noexcept {

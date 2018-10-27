@@ -23,6 +23,10 @@ using NumsTemplate = NumsTemplateImpl<
 #include "numbers.dat"
 >;
 
+using FirstNumbers = NumsTemplateImpl<
+#include "first_numbers.dat"
+>;
+
 struct Numbers {
   static constexpr size_t size() noexcept { return NumsTemplate::size(); }
   static constexpr std::array<Number, NumsTemplate::size()> nums = NumsTemplate::nums;

@@ -11,16 +11,11 @@ def is_valid(number):
 
 
 def valid_numbers():
-    num_list = []
-    for n0 in range(1000, 9999):
-        if is_valid(n0):
-            num_list += [n0]
-    return num_list
+    return [val for val in range(1000, 9999) if is_valid(val)]
 
 
 def get_first_numbers():
-    tn = [val for val in valid_numbers() if 0 not in number_to_list(val)]
-    return tn
+    return [val for val in valid_numbers() if 0 not in number_to_list(val)]
 
 
 if __name__ == '__main__':

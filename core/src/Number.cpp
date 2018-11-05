@@ -27,14 +27,6 @@ Result Number::GetResultFor(const Number& other) const noexcept {
   return { bulls, cows };
 }
 
-size_t Number::GetAsSingleNum() const noexcept {
-  size_t result = 0;
-  for (size_t i = 0; i < size(); ++i) {
-    result += at(i) * (size_t)std::pow(10, size() - 1 - i);
-  }
-  return result;
-}
-
 namespace cows_and_bulls {
 std::ostream& operator<<(std::ostream& os, const Number& number) {
   return os << number.GetAsSingleNum();

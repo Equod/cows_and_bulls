@@ -16,11 +16,11 @@ using cows_and_bulls::Numbers;
 using cows_and_bulls::Result;
 
 Game::Game() noexcept :
-  available_numbers(Numbers::nums.begin(), Numbers::nums.end())
+  available_numbers(Numbers::nums.begin(), Numbers::nums.end()), mt(rd())
 {}
 
 Number Game::GetNumberToAsk() const noexcept {
-  if(available_numbers.size() != Numbers::size()) {
+  if (available_numbers.size() != Numbers::size()) {
     std::array<uint64_t, Numbers::max()> erasable{};
 
     #pragma omp parallel for
@@ -29,12 +29,26 @@ Number Game::GetNumberToAsk() const noexcept {
           (GetMinErasable(*it) << 32 | (available_numbers.find(*it) != available_numbers.end()));
     };
 
-    return std::distance(erasable.begin(), std::max_element(erasable.begin(), erasable.end()));
+    std::vector<Number> candidates;
+    uint64_t max_val = 0;
+    for (auto it = erasable.begin(); it != erasable.end(); ++it) {
+      if (*it == max_val && max_val > 0) {
+        candidates.emplace_back(std::distance(erasable.begin(), it));
+      } else if (*it > max_val) {
+        max_val = *it;
+        candidates = {Number(static_cast<size_t>(std::distance(erasable.begin(), it)))};
+      }
+    }
+    if (candidates.size() == 1) {
+      return candidates[0];
+    }
+    if (!candidates.empty()) {
+      std::uniform_int_distribution<size_t> dist(0, candidates.size() - 1);
+      return candidates[dist(mt)];
+    }
   }
-  std::random_device rd;
-  std::mt19937 mt(rd());
   std::uniform_int_distribution<size_t> dist(0, FirstNumbers::size() - 1);
-  return FirstNumbers::idx[dist(mt)];
+  return Number(FirstNumbers::idx[dist(mt)]);
 }
 
 size_t Game::GetMinErasable(const Number& number) const noexcept {

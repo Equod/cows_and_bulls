@@ -6,6 +6,7 @@
 #define COWS_AND_BULLS_GAME_H
 
 #include <set>
+#include <random>
 #include "Number.h"
 
 namespace cows_and_bulls {
@@ -28,6 +29,8 @@ class Game {
 
  private:
   std::set<Number> available_numbers;
+  mutable std::random_device rd;
+  mutable std::mt19937 mt;
 };
 
 inline std::ostream& operator << (std::ostream& stream, const std::set<Number>& numbers) {
